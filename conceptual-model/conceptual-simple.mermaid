@@ -1,0 +1,57 @@
+erDiagram
+    CONNECTION_FACT {
+        int connection_id PK
+        int time_id FK
+        int service_id FK
+        int port_id FK
+        int protocol_id FK
+        int attack_id FK
+        float duration
+        int bytes_in
+        int bytes_out
+        int packets_in
+        int packets_out
+        float load
+    }
+
+    TIME {
+        int time_id PK
+        datetime timestamp
+        int hour
+        int day
+        int month
+        int year
+        boolean is_business_hour
+    }
+
+    SERVICE {
+        int service_id PK
+        string name
+        string category
+        string risk_level
+    }
+
+    PORT {
+        int port_id PK
+        int number
+        string range_type
+    }
+
+    PROTOCOL {
+        int protocol_id PK
+        string name
+        string type
+    }
+
+    ATTACK {
+        int attack_id PK
+        string category
+        boolean is_attack
+        int severity
+    }
+
+    CONNECTION_FACT }|--|| TIME : "occurs at"
+    CONNECTION_FACT }|--|| SERVICE : "uses"
+    CONNECTION_FACT }|--|| PORT : "uses"
+    CONNECTION_FACT }|--|| PROTOCOL : "uses"
+    CONNECTION_FACT }|--|| ATTACK : "classified as"

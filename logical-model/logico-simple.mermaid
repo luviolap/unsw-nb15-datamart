@@ -1,0 +1,43 @@
+erDiagram
+    CONNECTIONS {
+        bigint id PK
+        timestamp event_time FK
+        varchar service_name FK
+        integer src_port FK
+        integer dst_port FK
+        varchar protocol FK
+        varchar attack_category FK
+        float duration
+        bigint bytes_in
+        bigint bytes_out
+        integer packets_in 
+        integer packets_out
+    }
+
+    SERVICES {
+        varchar name PK
+        varchar type
+        varchar risk_level
+    }
+
+    ATTACKS {
+        varchar category PK
+        boolean is_attack
+        integer severity
+    }
+
+    PROTOCOLS {
+        varchar name PK 
+        varchar type
+    }
+    
+    PORTS {
+        integer number PK
+        varchar range_type
+    }
+
+    CONNECTIONS }|--|| SERVICES : uses
+    CONNECTIONS }|--|| ATTACKS : "classified as"
+    CONNECTIONS }|--|| PROTOCOLS : uses
+    CONNECTIONS }|--|| PORTS : "source"
+    CONNECTIONS }|--|| PORTS : "destination"
