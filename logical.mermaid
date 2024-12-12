@@ -1,0 +1,53 @@
+erDiagram
+    dim_time {
+        time_key SERIAL PK
+        timestamp TIMESTAMP
+        hour INTEGER
+        day INTEGER
+        month INTEGER
+        quarter INTEGER
+        year INTEGER
+        is_weekend BOOLEAN
+    }
+    dim_service {
+        service_key SERIAL PK
+        service_name VARCHAR
+        description TEXT
+    }
+    dim_protocol {
+        protocol_key SERIAL PK
+        protocol_name VARCHAR
+        protocol_state VARCHAR
+    }
+    dim_location {
+        location_key SERIAL PK
+        ip_address VARCHAR
+        port INTEGER
+    }
+    dim_attack {
+        attack_key SERIAL PK
+        is_attack BOOLEAN
+    }
+    fact_connections {
+        connection_key SERIAL PK
+        time_key INTEGER FK
+        src_location_key INTEGER FK
+        dst_location_key INTEGER FK
+        service_key INTEGER FK
+        protocol_key INTEGER FK
+        attack_key INTEGER FK
+        duration FLOAT
+        src_bytes BIGINT
+        dst_bytes BIGINT
+        src_packets BIGINT
+        dst_packets BIGINT
+        total_bytes BIGINT
+        total_packets BIGINT
+    }
+
+    fact_connections }|--|| dim_time : has
+    fact_connections }|--|| dim_service : uses
+    fact_connections }|--|| dim_protocol : uses
+    fact_connections }|--|| dim_location : "source from"
+    fact_connections }|--|| dim_location : "destination to"
+    fact_connections }|--|| dim_attack : classified_as

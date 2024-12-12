@@ -1,0 +1,41 @@
+graph TD
+    subgraph Dimensions
+        Time[Time Dimension<br>When?]
+        Service[Service Dimension<br>What Service?]
+        Protocol[Protocol Dimension<br>How?]
+        Location[Location Dimension<br>Where?]
+        Attack[Attack Dimension<br>Attack Status]
+    end
+
+    subgraph Facts
+        Connections[Network Connections<br>- Duration<br>- Bytes Transferred<br>- Packet Counts]
+    end
+
+    subgraph Metrics
+        M1[Traffic Volume]
+        M2[Attack Detection]
+        M3[Service Usage]
+        M4[Performance]
+    end
+
+    Time --> Connections
+    Service --> Connections
+    Protocol --> Connections
+    Location --> Connections
+    Attack --> Connections
+    
+    Connections --> M1
+    Connections --> M2
+    Connections --> M3
+    Connections --> M4
+
+    style Connections fill:#f9f,stroke:#333
+    style Time fill:#dfd,stroke:#333
+    style Service fill:#dfd,stroke:#333
+    style Protocol fill:#dfd,stroke:#333
+    style Location fill:#dfd,stroke:#333
+    style Attack fill:#dfd,stroke:#333
+    style M1 fill:#ddf,stroke:#333
+    style M2 fill:#ddf,stroke:#333
+    style M3 fill:#ddf,stroke:#333
+    style M4 fill:#ddf,stroke:#333
